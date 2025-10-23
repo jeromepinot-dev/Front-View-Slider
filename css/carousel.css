@@ -152,9 +152,7 @@
   /* Scale de l'image active hors de l'écran */
   --scale-active: 4;
   /* Alignement de l'image active hors de l'écran */
-  --translateY-active: 63%;
-  /* Alignement horizontal pour le slide journal de bord uniquement */
-  --translateX-active-jdb: -2.3%;
+  --translateY-active: 80%;
 
   &.active {
     transform: translateX(-50%);
