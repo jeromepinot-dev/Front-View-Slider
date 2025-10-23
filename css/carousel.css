@@ -1,0 +1,407 @@
+:root {
+  /* Transition principal du slide */
+  --transition-main: 1.3s ease-in-out;
+}
+
+.intro-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* min-height: 900px; */
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.menu-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  text-align: center;
+  /* min-height: 650px; */
+}
+
+.carousel {
+  width: 100%;
+  max-width: 1080px;
+  height: 70vh;
+  margin: 0 auto;
+  position: relative;
+  perspective: 1200px;
+  overflow: visible;
+}
+
+.menu-container {
+  list-style: none;
+  padding: 0;
+  position: relative;
+  height: 100%;
+}
+
+.menu-item {
+  position: absolute;
+  width: auto;
+  height: 100%;
+  transform: translateX(-50%) scale(1) translateY(0);
+  transition: transform var(--transition-main);
+  transform-origin: center center;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+
+  .menu-link-hitbox .menu-img {
+    display: block;
+    width: 100vh;
+    max-width: 100%;
+    height: auto;
+    pointer-events: none;
+    transition: transform var(--transition-main);
+  }
+  
+  .menu-title,
+  .menu-description {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 0;
+    transition: opacity var(--transition-main);
+    width: 100vh;
+    pointer-events: none;
+  }
+
+  .menu-title {
+    top: calc(50% - 11.5vh);
+    font-size: var(--heading-xl);
+  }
+
+  .menu-description {
+    top: calc(50% - 5.8vh);
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    text-align: center;
+    max-width: 42vw;
+  }
+
+  .menu-link {
+    left: 50%;
+    transform: translate(-50%, -50px);
+    opacity: 0;
+    position: absolute;
+    /* bottom:20px; */
+    cursor: pointer;
+    width: max-content;
+    padding: 15px 35px;
+    display: block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: var(--heading-s);
+    border-radius: 500px;
+    overflow: hidden;
+    color: #000;
+    transition: transform var(--transition-main), opacity var(--transition-main);
+
+    &.Red {
+      background: var(--color-red);
+    }
+
+    &.Blue {
+      background: var(--color-blue);
+    }
+
+    &.Gray {
+      background: var(--color-grey);
+    }
+
+    &.Brown {
+      background: var(--color-brown);
+    }
+
+    &.Orange {
+      background: var(--color-orange);
+    }
+
+    .button {
+      position: relative;
+      z-index: 10;
+      transition: color 0.4s;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    &::before {
+      content: "";
+      background: #fff;
+      width: 130%;
+      left: -10%;
+      transform: skew(30deg);
+      transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  }
+  }
+
+  /* Scale de l'image active hors de l'écran */
+  --scale-active: 4;
+  /* Alignement de l'image active hors de l'écran */
+  --translateY-active: 63%;
+  /* Alignement horizontal pour le slide journal de bord uniquement */
+  --translateX-active-jdb: -2.3%;
+
+  &.active {
+    transform: translateX(-50%);
+    z-index: 5;
+
+    .menu-img {
+      /* Slide principal : centré, zoomé et mis en avant */
+      transform: scale(var(--scale-active)) translateY(var(--translateY-active));
+    }
+
+    .menu-title,
+    .menu-description {
+      opacity: 1;
+    }
+
+    .menu-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      pointer-events: auto;
+
+      &:hover {
+        .button {
+          color: #000;
+        }
+
+        &::before {
+          transform: translate3d(100%, 0, 0);
+        }
+      }
+    }
+  }
+
+  &:not(.active) {
+    .menu-link-hitbox {
+      display: block;
+      position: relative;
+      border-radius: 50%;
+      cursor: pointer;
+      background: transparent;
+      pointer-events: auto;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: rotate(5deg) scale(1.05);
+      }
+    }
+  }
+
+  /* Alignement vertical vers le milieu de l'écran */
+  --translate-low: 0vh;
+  /* Alignement vertical vers le haut de l'écran */
+  --translate-high: -85vh;
+  /* Scale pour effet très éloigner */
+  --scale-far: 0.35;
+  /* Scale pour effet moins éloigner */
+  --scale-mid: 0.5;
+
+  &.behind-left-1 {
+    /* Slide à gauche au bord de l'écran : réduit, légèrement au-dessus */
+    transform: translateX(calc(-50% - 35vw)) scale(var(--scale-mid)) translateY(var(--translate-low));
+    z-index: 4;
+  }
+
+  &.behind-left-2 {
+    /* Slide à gauche prés du centre de l'écran : encore plus petit et plus haut */
+    transform: translateX(calc(-50% - 12vw)) scale(var(--scale-far)) translateY(var(--translate-high));
+    z-index: 3;
+  }
+
+  &.behind-right-1 {
+    /* Slide à droite au bord de l'écran : réduit, légèrement au-dessus */
+    transform: translateX(calc(-50% + 35vw)) scale(var(--scale-mid)) translateY(var(--translate-low));
+    z-index: 4;
+  }
+
+  &.behind-right-2 {
+    /* Slide à droite prés du centre de l'écran : encore plus petit et plus haut */
+    transform: translateX(calc(-50% + 12vw)) scale(var(--scale-far)) translateY(var(--translate-high));
+    z-index: 3;
+  }
+
+  &.home-slide {
+    .menu-img {
+      width: 180px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .menu-img,
+    .menu-title {
+      opacity: 0;
+      transition: opacity var(--transition-main);
+    }
+
+    .menu-img {
+      top: 45vh;
+    }
+
+    .menu-title {
+      display: block;
+      top: 50vh;
+      width: clamp(300px, 700px, 900px);
+      font-size: var(--heading-xl);
+      font-weight: bold;
+      text-shadow:
+        0 0 5px #8F00FF99,
+        0 0 10px #FD09,
+        0 0 15px #01BEFE99;
+    }
+
+    &.active {
+
+      .menu-title,
+      .menu-img {
+        opacity: 1;
+      }
+
+      .menu-img {
+        transform: scale(1) translateY(0);
+      }
+
+      ~.menu-item {
+        /* Alignement vertical vers le milieu de l'écran */
+        --translate-home-low: 5vh;
+        /* Alignement vertical vers le haut/milieu de l'écran */
+        --translate-home-mid: -75vh;
+        /* Alignement vertical vers le haut de l'écran */
+        --translate-home-high: -160vh;
+        /* Scale pour effet très éloigner */
+        --scale-far: 0.25;
+        /* Scale pour effet éloigner */
+        --scale-mid: 0.32;
+        /* Scale pour effet éloigner proche */
+        --scale-close: 0.38;
+
+        &.behind-left-1 {
+          /* Slide à gauche au bord de l'écran : réduit, légèrement au-dessus */
+          transform: translateX(-110%) scale(var(--scale-close)) translateY(var(--translate-home-low));
+          z-index: 4;
+        }
+
+        &.behind-left-2 {
+          /* Slide à gauche prés du centre de l'écran : encore plus petit et plus haut */
+          transform: translateX(-85%) scale(var(--scale-mid)) translateY(var(--translate-home-mid));
+          z-index: 3;
+        }
+
+        &.behind-mid {
+          /* Slide au centre de l'écran : encore plus haut et plus petit */
+          transform: translateX(-50%) scale(var(--scale-far)) translateY(var(--translate-home-high));
+          z-index: 2;
+        }
+
+        &.behind-right-1 {
+          /* Slide à droite au bord de l'écran : réduit, légèrement au-dessus */
+          transform: translateX(10%) scale(var(--scale-close)) translateY(var(--translate-home-low));
+          z-index: 4;
+        }
+
+        &.behind-right-2 {
+          /* Slide à droite prés du centre de l'écran : encore plus petit et plus haut */
+          transform: translateX(-15%) scale(var(--scale-mid)) translateY(var(--translate-home-mid));
+          z-index: 3;
+        }
+      }
+    }
+
+    &:not(.active) {
+
+      .menu-img,
+      menu-title {
+        opacity: 0;
+      }
+    }
+  }
+
+  @media (width <=768px) {
+    .menu-title {
+      top: calc(50% - 21vh);
+    }
+
+    .menu-description {
+      top: calc(50% - 16vh);
+    }
+
+    .menu-link {
+      top: calc(50% + 16vh);
+    }
+
+    /* Scale de l'image active pour repsonsive */
+    --scale-active: 5;
+    /* Alignement vertical de l'image active pour responsive  */
+    --translateY-active: 68%;
+
+    &.active {
+      .menu-img {
+        transform: scale(var(--scale-active)) translateY(var(--translateY-active));
+      }
+
+      &.position-jdb {
+        transform: scale(var(--scale-active)) translateX(var(--translateX-active-jdb)) translateY(var(--translateY-active));
+      }
+    }
+
+  }
+}
+
+.menu-nav {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 115px;
+  background-image: url('../img/ManetteFleches.webp');
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  pointer-events: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 10;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .nav {
+    position: relative;
+    bottom: 44px;
+    background: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 11;
+
+    &.prev {
+      margin-left: 22px;
+    }
+
+    &.next {
+      margin-right: 22px;
+    }
+  }
+}

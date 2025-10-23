@@ -1,0 +1,142 @@
+@font-face {
+  font-family: "ClashGrotesk-Semibold";
+  src: url("../fonts/ClashGrotesk/ClashGrotesk-Semibold.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "ClashGrotesk-Medium";
+  src: url("../fonts/ClashGrotesk/ClashGrotesk-Medium.ttf") format("opentype");
+}
+
+@font-face {
+  font-family: "ClashGrotesk-Regular";
+  src: url("../fonts/ClashGrotesk/ClashGrotesk-Regular.ttf") format("opentype");
+}
+
+/* Decorator */
+@font-face {
+  font-family: "PressStart";
+  src: url("../fonts/PressStart2P-Regular.ttf") format("opentype");
+}
+
+
+:root {
+  /* Colors */
+  --color-blue: #25BDD0;
+  --color-red: #CF1E17;
+  --color-orange: #E19459;
+  --color-brown: #883E2F;
+  --color-grey: #919DBA;
+  /* Text */
+  --color-light: #F4F4F4;
+  --color-dark: #080708;
+
+  /* --- Font Size --- */
+  /* Base text sizes */
+  --base-font-size: 16px;
+  --body-text: clamp(1rem, 0.95rem + 0.3vw, 1rem);
+
+  /* Headings (increments of 8px) */
+  --heading-hero: clamp(3rem, 5vw + 1rem, 6rem);
+  /* 48 → 96px */
+  --heading-xl: clamp(2.25rem, 3vw + 1rem, 3.75rem);
+  /* 36 → 60px */
+  --heading-l: clamp(2rem, 2vw + 0.5rem, 3rem);
+  /* 32 → 48px */
+  --heading-m: clamp(1.5rem, 1.5vw + 0.5rem, 2.125rem);
+  /* 24 → 34px */
+  --heading-s: clamp(1.25rem, 1vw + 0.25rem, 1.5rem);
+  /* 20 → 24px */
+  --heading-xs: clamp(1rem, 0.5vw + 0.75rem, 1.25rem);
+  /* 16 → 20px */
+
+  /* Typography */
+  --font-medium: "ClashGrotesk-Medium", sans-serif;
+  --font-regular: "ClashGrotesk-Regular", sans-serif;
+  --font-bold: "ClashGrotesk-Semibold", sans-serif;
+  --font-decorative: "PressStart";
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-regular);
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-size: var(--base-font-size);
+  background-image: url("../img/FondEtoiles.webp");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--font-bold), fantasy, sans-serif;
+}
+
+/* Heading Styles */
+h1,
+.h1 {
+  font-size: var(--heading-hero);
+  line-height: 1.2;
+}
+
+h2,
+.h2 {
+  font-size: var(--heading-xl);
+  line-height: 1.2;
+}
+
+h3,
+.h3 {
+  font-size: var(--heading-l);
+  line-height: 1.3;
+}
+
+h4,
+.h4 {
+  font-size: var(--heading-m);
+  line-height: 1.3;
+}
+
+h5,
+.h5 {
+  font-size: var(--heading-s);
+  line-height: 1.4;
+}
+
+h6,
+.h6 {
+  font-size: var(--heading-xs);
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.section {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Tablet */
+@media (min-width: 768px) {}
+
+/* Desktop only (1024px and up) */
+@media (min-width: 1024px) {}
